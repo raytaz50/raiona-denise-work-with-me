@@ -1,0 +1,292 @@
+# Raiona Denise — Work With Me Landing Page (Claude Code build)
+
+Hand this whole file to Claude Code. It contains the prompt, the asset plan, and the three source files. Claude Code has local file access, so it can compress your graphics, build the `assets/` folder, and run a live preview that displays everything correctly.
+
+---
+
+## PROMPT TO GIVE CLAUDE CODE
+
+> Build a static landing page from the three files below (`index.html`, `styles.css`, `script.js`). Create the folder structure exactly as shown. Then take my source graphics from the folder I point you to, optimize them for web per the "Asset optimization" section, and save them into `/assets/` using the exact output filenames listed. Do not redesign anything or alter the graphics beyond resizing and compression. After building, start a local server so I can preview the finished site, then tell me how to deploy it.
+
+---
+
+## FILE STRUCTURE
+
+```
+raiona-work-with-me/
+├── index.html
+├── styles.css
+├── script.js
+└── assets/
+    ├── raiona-portrait.png
+    ├── raiona-logo.png
+    ├── graphic-design.png
+    ├── brand-visibility-bundle.png
+    ├── print-design-bundle.png
+    ├── quick-build-landing-pages.png
+    ├── strategy-session.png
+    └── church-promo-pack.png
+```
+
+---
+
+## ASSET OPTIMIZATION (instructions for Claude Code)
+
+Use whatever is available locally (sharp, ImageMagick, sips, or pngquant). Keep aspect ratios. Do not crop.
+
+| Output filename | Source graphic | Target |
+| --- | --- | --- |
+| `raiona-portrait.png` | the transparent cutout of Raiona holding a laptop | keep transparency, max height ~1300px, PNG, under ~400KB |
+| `raiona-logo.png` | "Raiona Denise Full Logo Orange" (orange full lockup) | keep transparency, PNG, under ~80KB |
+| `graphic-design.png` | the GRAPHIC DESIGN card (corrected spelling) | 1080x1350, under ~250KB |
+| `brand-visibility-bundle.png` | the BRAND VISIBILITY BUNDLE card | 1080x1350, under ~250KB |
+| `print-design-bundle.png` | the PRINT DESIGN BUNDLE card | 1080x1350, under ~250KB |
+| `quick-build-landing-pages.png` | the QUICK BUILD LANDING PAGES card | 1080x1350, under ~250KB |
+| `strategy-session.png` | the BOOK YOUR STRATEGY SESSION card | 1080x1350, under ~250KB |
+| `church-promo-pack.png` | the 48-HOUR CHURCH PROMO PACK card | 1080x1350, under ~250KB |
+
+The six service cards are already 1080x1350 (4:5), so they only need compression, not resizing. The portrait must stay a transparent PNG so it layers over the name type.
+
+After optimizing, the page needs no further image work. If any source is missing, leave the matching `assets/` slot empty and the page will show a clean branded placeholder there.
+
+---
+
+## WHERE YOUR SQUARE LINKS GO
+
+Open `script.js` and paste each booking link between the quotes on the `url:` lines in the `services` array. Nothing else in that file needs editing.
+
+---
+
+## index.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Raiona Denise — Work With Me</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,800;0,900;1,700;1,800;1,900&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <section class="hero">
+    <div class="hero-stage">
+      <div class="name-stack">
+        <span class="name-raiona">Raiona</span>
+        <span class="name-denise">Denise</span>
+      </div>
+
+      <div class="portrait-wrap">
+        <img src="assets/raiona-portrait.png" alt="Raiona Denise holding a laptop"
+             onerror="this.outerHTML='&lt;div class=\'portrait-fallback\'&gt;Your portrait&lt;br&gt;raiona-portrait.png&lt;/div&gt;'" />
+      </div>
+
+      <div class="tag tag-left">Where Vision<br />Becomes<br /><span class="accent">VISIBILITY</span></div>
+      <div class="tag tag-right">Faith-based visual<br />communicator &amp;<br />visibility strategist</div>
+    </div>
+  </section>
+
+  <div class="band">
+    <img class="band-logo" alt="Raiona Denise logo" />
+    <h2>WAYS TO WORK WITH ME</h2>
+    <img class="band-logo" alt="Raiona Denise logo" />
+  </div>
+
+  <section class="services" aria-label="Ways to work with Raiona Denise">
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <footer class="footer">
+    <div class="big">RAIONA DENISE</div>
+    <a href="mailto:designer@raionadenise.com">DESIGNER@RAIONADENISE.COM</a>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+```
+
+---
+
+## styles.css
+
+```css
+:root {
+  /* BRAND COLORS — paste exact hex from your brand guide if these differ */
+  --cream:   #F4EBE0;  /* warm background */
+  --ink:     #161616;  /* near black type */
+  --pumpkin: #D9692B;  /* pumpkin spice accent, used sparingly */
+  --taupe:   #E7E2D9;  /* soft card frame */
+  --muted:   #8C8478;  /* quiet label grey */
+  --serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --sans:  'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { background: var(--cream); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+img { display: block; }
+
+/* ===== HERO ===== */
+.hero { background: var(--cream); padding: 34px 24px 0; overflow: hidden; }
+.hero-stage { position: relative; max-width: 1180px; margin: 0 auto; min-height: 740px; }
+.name-stack { text-align: center; position: relative; z-index: 1; padding-top: 6px; }
+.name-raiona {
+  display: block; font-family: var(--serif); font-style: italic; font-weight: 800;
+  color: var(--pumpkin); font-size: clamp(3rem, 9vw, 7.6rem); line-height: .92; letter-spacing: .005em;
+}
+.name-denise {
+  display: block; font-family: var(--serif); font-weight: 900; color: var(--ink);
+  font-size: clamp(4.6rem, 20vw, 13rem); line-height: .8; letter-spacing: -.01em; margin-top: -.04em;
+}
+.portrait-wrap {
+  position: absolute; left: 50%; top: 64px; transform: translateX(-50%);
+  z-index: 2; height: clamp(400px, 62vh, 650px); width: auto; max-width: 92%;
+  display: flex; align-items: flex-start; justify-content: center;
+}
+.portrait-wrap img { height: 100%; width: auto; max-width: 100%; object-fit: contain; }
+.portrait-fallback {
+  height: 100%; aspect-ratio: 1 / 2.4; background: var(--taupe); border-radius: 18px;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  font-family: var(--sans); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted); padding: 18px;
+}
+.tag { z-index: 3; }
+.tag-left {
+  position: absolute; left: 3%; top: 43%; max-width: 235px;
+  font-family: var(--sans); font-weight: 800; font-size: clamp(1.3rem, 2.3vw, 1.85rem);
+  line-height: 1.12; color: var(--ink);
+}
+.tag-left .accent { color: var(--pumpkin); }
+.tag-right {
+  position: absolute; right: 3%; top: 52%; max-width: 255px; text-align: left;
+  font-family: var(--serif); font-weight: 700; font-size: clamp(1.15rem, 2vw, 1.7rem);
+  line-height: 1.18; color: var(--ink);
+}
+
+/* ===== BLACK BAND ===== */
+.band {
+  background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: space-between;
+  gap: 22px; padding: 24px 6%; margin-top: 18px;
+}
+.band-logo { height: 56px; width: auto; flex: 0 0 auto; }
+.band-logo-fallback {
+  flex: 0 0 auto; font-family: var(--serif); font-weight: 700; color: var(--pumpkin);
+  font-size: clamp(.85rem, 2.4vw, 1.2rem); letter-spacing: .04em; white-space: nowrap;
+}
+.band h2 {
+  flex: 1; margin: 0; text-align: center; font-family: var(--serif); font-weight: 700; color: #fff;
+  font-size: clamp(1.45rem, 4.6vw, 2.9rem); letter-spacing: .06em;
+}
+
+/* ===== SERVICES GRID ===== */
+.services { background: var(--cream); padding: 58px 6% 30px; }
+.grid { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+.card {
+  display: block; text-decoration: none; border-radius: 16px;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.card:hover { transform: translateY(-6px); box-shadow: 0 18px 42px rgba(0, 0, 0, .16); }
+.card:focus-visible { outline: 3px solid var(--pumpkin); outline-offset: 4px; }
+.card-media {
+  position: relative; aspect-ratio: 4 / 5; background: var(--taupe);
+  border-radius: 16px; overflow: hidden;
+}
+.card-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.card-fallback {
+  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 20px; z-index: 0;
+}
+.card-fallback .ff-title { font-family: var(--serif); font-weight: 800; font-size: 1.45rem; line-height: 1.1; color: var(--ink); }
+.card-fallback .ff-note { font-family: var(--sans); font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-top: 12px; }
+
+/* ===== FOOTER ===== */
+.footer { background: var(--cream); text-align: center; padding: 64px 6% 74px; }
+.footer .big {
+  font-family: var(--serif); font-weight: 900; color: var(--ink);
+  font-size: clamp(2.5rem, 11.5vw, 7.2rem); line-height: 1; letter-spacing: .02em;
+}
+.footer a {
+  display: inline-block; margin-top: 22px; font-family: var(--serif); color: var(--ink);
+  text-decoration: none; letter-spacing: .2em; font-size: clamp(.78rem, 2.5vw, 1.05rem); transition: color .2s ease;
+}
+.footer a:hover { color: var(--pumpkin); }
+
+/* ===== MOBILE ===== */
+@media (max-width: 820px) {
+  .hero-stage { min-height: auto; display: flex; flex-direction: column; align-items: center; }
+  .name-denise { font-size: clamp(3.4rem, 22vw, 6rem); }
+  .portrait-wrap { position: static; transform: none; height: auto; width: min(76%, 360px); margin-top: 4px; }
+  .portrait-wrap img { height: auto; width: 100%; }
+  .portrait-fallback { aspect-ratio: 3 / 5; width: 100%; }
+  .tag { position: static; max-width: none; text-align: center; margin: 20px auto 0; }
+  .tag-right { text-align: center; }
+}
+@media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+```
+
+---
+
+## script.js
+
+```javascript
+/* =========================================================
+   EDIT YOUR SQUARE / BOOKING LINKS HERE
+   Paste each link between the quotes on the "url" line.
+   ========================================================= */
+const services = [
+  { title: "Graphic Design",            image: "assets/graphic-design.png",            url: "GRAPHIC_DESIGN_SQUARE_LINK_HERE",            label: "Book Graphic Design" },
+  { title: "Brand Visibility Bundle",   image: "assets/brand-visibility-bundle.png",   url: "BRAND_VISIBILITY_BUNDLE_SQUARE_LINK_HERE",   label: "Book Brand Visibility Bundle" },
+  { title: "Print Design Bundle",       image: "assets/print-design-bundle.png",       url: "PRINT_DESIGN_BUNDLE_SQUARE_LINK_HERE",       label: "Book Print Design Bundle" },
+  { title: "Quick Build Landing Pages", image: "assets/quick-build-landing-pages.png", url: "QUICK_BUILD_LANDING_PAGES_SQUARE_LINK_HERE", label: "Book Quick Build Landing Pages" },
+  { title: "Strategy Session",          image: "assets/strategy-session.png",          url: "STRATEGY_SESSION_SQUARE_LINK_HERE",          label: "Book Strategy Session" },
+  { title: "48-Hour Church Promo Pack", image: "assets/church-promo-pack.png",         url: "CHURCH_PROMO_PACK_SQUARE_LINK_HERE",         label: "Book 48-Hour Church Promo Pack" }
+];
+
+const grid = document.getElementById("grid");
+
+services.forEach(function (s) {
+  const a = document.createElement("a");
+  a.className = "card";
+  a.href = s.url;
+  a.target = "_blank";
+  a.rel = "noopener noreferrer";
+  a.setAttribute("aria-label", s.label);
+
+  const media = document.createElement("div");
+  media.className = "card-media";
+
+  const fb = document.createElement("div");
+  fb.className = "card-fallback";
+  fb.innerHTML = '<div class="ff-title">' + s.title + '</div><div class="ff-note">graphic goes here</div>';
+
+  const img = document.createElement("img");
+  img.src = s.image;
+  img.alt = s.title + " service graphic by Raiona Denise";
+  img.onerror = function () { this.style.display = "none"; };
+
+  media.appendChild(fb);
+  media.appendChild(img);
+  a.appendChild(media);
+  grid.appendChild(a);
+});
+
+/* RD logo for the black band. Place the optimized logo at assets/raiona-logo.png. */
+const rdLogo = "assets/raiona-logo.png";
+document.querySelectorAll(".band-logo").forEach(function (el) {
+  el.src = rdLogo;
+  el.onerror = function () {
+    this.outerHTML = '<span class="band-logo-fallback">Raiona Denise</span>';
+  };
+});
+```
+
+---
+
+## DEPLOY
+
+Once the assets are in place and the links are added, this is a plain static site. Drop the whole folder onto Netlify, GitHub Pages, or your cPanel host on raionadenise.com. No build step required.
